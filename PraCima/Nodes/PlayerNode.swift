@@ -12,7 +12,7 @@ class PlayerNode: SKNode {
     
     private var player: SKShapeNode!
     private var diff = 0
-    private let radius: CGFloat = 30.0
+    private let radius: CGFloat = 40.0
     
     // MARK: - Initializes
     init(diff: Int) {
@@ -36,7 +36,7 @@ extension PlayerNode {
         player = SKShapeNode(circleOfRadius: radius)
         player.name = "Player"
         player.zPosition = .pi
-        player.fillColor = .red
+        player.fillColor = UIColor(hex: 0xFF43FC)
         player.physicsBody = SKPhysicsBody(circleOfRadius: radius * 0.8)
         player.physicsBody?.isDynamic = false
         player.physicsBody?.linearDamping = 0.0
@@ -50,5 +50,14 @@ extension PlayerNode {
         player.physicsBody?.contactTestBitMask = 0
         player.physicsBody?.collisionBitMask = 0
         addChild(player)
+    }
+    
+    internal func activate(_ isDynamic: Bool) {
+        player.physicsBody?.isDynamic = isDynamic
+    }
+    
+    internal func jump(_ right: Bool) {
+        let velocity = CGVector(dx: right ? -200 : 200, dy: 1000.0)
+        player.physicsBody?.velocity = velocity
     }
 }
