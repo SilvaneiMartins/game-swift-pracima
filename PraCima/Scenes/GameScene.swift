@@ -47,7 +47,13 @@ class GameScene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
+        if -playerNode.height() + frame.midY < worldNode.position.y {
+            worldNode.position.y = -playerNode.height() + frame.midY
+        }
         
+        if posY - playerNode.height() < frame.midY {
+            addObstacles()
+        }
     }
 }
 
@@ -75,6 +81,7 @@ extension GameScene {
         // TODO: - ObstaclesNode
         worldNode.addChild(obstaclesNode)
         addObstacles()
+        posY = frame.midY
     }
     
     private func setupPhysics() {
@@ -110,9 +117,11 @@ extension GameScene {
 extension GameScene {
     private func addObstacles() {
         let piperPair = SKNode()
-        piperPair.position = CGPoint(x: 0.0, y: frame.midY)
+        piperPair.position = CGPoint(x: 0.0, y: posY)
         piperPair.zPosition = 1.0
-        piperPair.name = "Pair"
+        
+        pairNum += 1
+        piperPair.name = "Pair\(pairNum)"
         
         let size = CGSize(width: screenWidth, height: 50.0)
         let pipe_1 = SKSpriteNode(color: .black, size: size)
@@ -131,6 +140,7 @@ extension GameScene {
         piperPair.addChild(pipe_2)
         
         obstaclesNode.addChild(piperPair)
+        posY += frame.midY * 0.7
     }
 }
 

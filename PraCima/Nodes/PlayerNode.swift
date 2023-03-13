@@ -69,4 +69,8 @@ extension PlayerNode {
     internal func side() {
         player.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 50.0))
     }
+    
+    internal func height() -> CGFloat {
+        return player.position.y + screenHeight / 2 * 0.75
+    }
 }
