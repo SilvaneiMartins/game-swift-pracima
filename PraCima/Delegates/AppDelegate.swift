@@ -11,10 +11,21 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    var isAllIPad = false
+    var isIPadPro = false
+    var isIpad11 = false
+    var isIpad12 = false
+    var isIpad = false
+    
+    var isIphoneX = false
+    var isIphonePlus = false
+    var isIphone = false
+    var isIphone5 = false
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        setupDevice()
         return true
     }
 
@@ -36,5 +47,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+    func setupDevice() {
+        switch UIDevice.current.userInterfaceIdiom {
+        case .pad:
+            isAllIPad = true
+            
+            switch UIScreen.main.nativeBounds.height {
+            case 2388: isIpad11 = true; break
+            case 2732: isIpad12 = true; break
+            default: isIPadPro = true; break
+            }
+            
+            if isIpad12 || isIPadPro {
+                isIpad = true
+            }
+            
+        case .phone:
+            switch UIScreen.main.nativeBounds.height {
+            case 2688, 1792, 2436, 2778: isIphoneX = true; break
+            case 1920, 2208: isIphonePlus = true; break
+            case 1334: isIphone = true; break
+            case 1136: isIphone5 = true; break
+            default: isIphoneX = true; break
+            }
+        case .tv: break
+        default: break
+        }
+    }
 }
 

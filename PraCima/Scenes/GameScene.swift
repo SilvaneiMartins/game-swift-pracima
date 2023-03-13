@@ -16,6 +16,10 @@ class GameScene: SKScene {
     private var bgNode: SKSpriteNode!
     
     private let playerNode = PlayerNode(diff: 0)
+    private let wallNode = WallNode()
+    private let leftNode = SideNode()
+    private let rightNode = SideNode()
+    
     private var firstTap = true
     
     
@@ -36,11 +40,6 @@ class GameScene: SKScene {
         
         let location = touch.location(in: self)
         let right = !(location.x > frame.width / 2)
-        
-//        var right = true
-//        if location.x > frame.width / 2 {
-//            right = false
-//        }
         
         playerNode.jump(right)
     }
@@ -67,6 +66,9 @@ extension GameScene {
         // TODO: - PlayerNode
         playerNode.position = CGPoint(x: frame.midX, y: frame.midY * 0.6)
         worldNode.addChild(playerNode)
+        
+        // TODO: - WallNode
+        addWall()
     }
     
     private func setupPhysics() {
@@ -81,5 +83,18 @@ extension GameScene {
         bgNode.zPosition = -1.0
         bgNode.position = CGPoint(x: frame.midX, y: frame.midY)
         addChild(bgNode)
+    }
+}
+
+// MARK: - WallNode
+extension GameScene {
+    private func addWall() {
+        wallNode.position = CGPoint(x: frame.midX, y: 0.0)
+        leftNode.position = CGPoint(x: playableRect.minX, y: frame.midY)
+        rightNode.position = CGPoint(x: playableRect.maxX, y: frame.midY)
+        
+        addChild(wallNode)
+        addChild(leftNode)
+        addChild(rightNode)
     }
 }
