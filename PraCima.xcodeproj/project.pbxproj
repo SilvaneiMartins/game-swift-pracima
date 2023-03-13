@@ -15,6 +15,13 @@
 		31D3BA7329BEC31E00ADD58E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31D3BA7129BEC31E00ADD58E /* Main.storyboard */; };
 		31D3BA7529BEC32100ADD58E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31D3BA7429BEC32100ADD58E /* Assets.xcassets */; };
 		31D3BA7829BEC32100ADD58E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31D3BA7629BEC32100ADD58E /* LaunchScreen.storyboard */; };
+		31D3BA8C29BEC4C000ADD58E /* rimouski sb.otf in Resources */ = {isa = PBXBuildFile; fileRef = 31D3BA8429BEC4C000ADD58E /* rimouski sb.otf */; };
+		31D3BA8D29BEC4C000ADD58E /* wheaton capitals.otf in Resources */ = {isa = PBXBuildFile; fileRef = 31D3BA8529BEC4C000ADD58E /* wheaton capitals.otf */; };
+		31D3BA8E29BEC4C000ADD58E /* jump.wav in Resources */ = {isa = PBXBuildFile; fileRef = 31D3BA8729BEC4C000ADD58E /* jump.wav */; };
+		31D3BA8F29BEC4C000ADD58E /* superScore.wav in Resources */ = {isa = PBXBuildFile; fileRef = 31D3BA8829BEC4C000ADD58E /* superScore.wav */; };
+		31D3BA9029BEC4C000ADD58E /* collision.wav in Resources */ = {isa = PBXBuildFile; fileRef = 31D3BA8929BEC4C000ADD58E /* collision.wav */; };
+		31D3BA9129BEC4C000ADD58E /* btn.wav in Resources */ = {isa = PBXBuildFile; fileRef = 31D3BA8A29BEC4C000ADD58E /* btn.wav */; };
+		31D3BA9229BEC4C000ADD58E /* score.wav in Resources */ = {isa = PBXBuildFile; fileRef = 31D3BA8B29BEC4C000ADD58E /* score.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +34,14 @@
 		31D3BA7229BEC31E00ADD58E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		31D3BA7429BEC32100ADD58E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		31D3BA7729BEC32100ADD58E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		31D3BA8429BEC4C000ADD58E /* rimouski sb.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "rimouski sb.otf"; sourceTree = "<group>"; };
+		31D3BA8529BEC4C000ADD58E /* wheaton capitals.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "wheaton capitals.otf"; sourceTree = "<group>"; };
+		31D3BA8729BEC4C000ADD58E /* jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump.wav; sourceTree = "<group>"; };
+		31D3BA8829BEC4C000ADD58E /* superScore.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = superScore.wav; sourceTree = "<group>"; };
+		31D3BA8929BEC4C000ADD58E /* collision.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = collision.wav; sourceTree = "<group>"; };
+		31D3BA8A29BEC4C000ADD58E /* btn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = btn.wav; sourceTree = "<group>"; };
+		31D3BA8B29BEC4C000ADD58E /* score.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = score.wav; sourceTree = "<group>"; };
+		31D3BA9329BEC54100ADD58E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,16 +74,80 @@
 		31D3BA6629BEC31E00ADD58E /* PraCima */ = {
 			isa = PBXGroup;
 			children = (
-				31D3BA6729BEC31E00ADD58E /* AppDelegate.swift */,
+				31D3BA7E29BEC3FC00ADD58E /* Delegates */,
 				31D3BA6929BEC31E00ADD58E /* GameScene.sks */,
 				31D3BA6B29BEC31E00ADD58E /* Actions.sks */,
-				31D3BA6D29BEC31E00ADD58E /* GameScene.swift */,
-				31D3BA6F29BEC31E00ADD58E /* GameViewController.swift */,
-				31D3BA7129BEC31E00ADD58E /* Main.storyboard */,
-				31D3BA7429BEC32100ADD58E /* Assets.xcassets */,
-				31D3BA7629BEC32100ADD58E /* LaunchScreen.storyboard */,
+				31D3BA7F29BEC41300ADD58E /* Scenes */,
+				31D3BA8029BEC42400ADD58E /* Controllers */,
+				31D3BA8129BEC44C00ADD58E /* Mains */,
+				31D3BA8229BEC48B00ADD58E /* Resources */,
 			);
 			path = PraCima;
+			sourceTree = "<group>";
+		};
+		31D3BA7E29BEC3FC00ADD58E /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				31D3BA6729BEC31E00ADD58E /* AppDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		31D3BA7F29BEC41300ADD58E /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				31D3BA6D29BEC31E00ADD58E /* GameScene.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		31D3BA8029BEC42400ADD58E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				31D3BA6F29BEC31E00ADD58E /* GameViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		31D3BA8129BEC44C00ADD58E /* Mains */ = {
+			isa = PBXGroup;
+			children = (
+				31D3BA7129BEC31E00ADD58E /* Main.storyboard */,
+				31D3BA7629BEC32100ADD58E /* LaunchScreen.storyboard */,
+			);
+			path = Mains;
+			sourceTree = "<group>";
+		};
+		31D3BA8229BEC48B00ADD58E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				31D3BA9329BEC54100ADD58E /* Info.plist */,
+				31D3BA8329BEC4C000ADD58E /* Fonts */,
+				31D3BA8629BEC4C000ADD58E /* Sounds */,
+				31D3BA7429BEC32100ADD58E /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		31D3BA8329BEC4C000ADD58E /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				31D3BA8429BEC4C000ADD58E /* rimouski sb.otf */,
+				31D3BA8529BEC4C000ADD58E /* wheaton capitals.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		31D3BA8629BEC4C000ADD58E /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				31D3BA8729BEC4C000ADD58E /* jump.wav */,
+				31D3BA8829BEC4C000ADD58E /* superScore.wav */,
+				31D3BA8929BEC4C000ADD58E /* collision.wav */,
+				31D3BA8A29BEC4C000ADD58E /* btn.wav */,
+				31D3BA8B29BEC4C000ADD58E /* score.wav */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,11 +208,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31D3BA8E29BEC4C000ADD58E /* jump.wav in Resources */,
+				31D3BA9229BEC4C000ADD58E /* score.wav in Resources */,
+				31D3BA8C29BEC4C000ADD58E /* rimouski sb.otf in Resources */,
 				31D3BA7329BEC31E00ADD58E /* Main.storyboard in Resources */,
+				31D3BA8F29BEC4C000ADD58E /* superScore.wav in Resources */,
 				31D3BA6A29BEC31E00ADD58E /* GameScene.sks in Resources */,
+				31D3BA9129BEC4C000ADD58E /* btn.wav in Resources */,
 				31D3BA7529BEC32100ADD58E /* Assets.xcassets in Resources */,
 				31D3BA7829BEC32100ADD58E /* LaunchScreen.storyboard in Resources */,
+				31D3BA8D29BEC4C000ADD58E /* wheaton capitals.otf in Resources */,
 				31D3BA6C29BEC31E00ADD58E /* Actions.sks in Resources */,
+				31D3BA9029BEC4C000ADD58E /* collision.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,12 +381,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = MRWW7972SX;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PraCima/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -323,12 +411,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = MRWW7972SX;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PraCima/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
