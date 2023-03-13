@@ -19,9 +19,11 @@ class GameScene: SKScene {
     private let wallNode = WallNode()
     private let leftNode = SideNode()
     private let rightNode = SideNode()
+    private let obstaclesNode = SKNode()
     
     private var firstTap = true
-    
+    private var posY: CGFloat = 0.0
+    private var pairNum = 0
     
     // MARK: - Lifecycle
     
@@ -69,6 +71,10 @@ extension GameScene {
         
         // TODO: - WallNode
         addWall()
+        
+        // TODO: - ObstaclesNode
+        worldNode.addChild(obstaclesNode)
+        addObstacles()
     }
     
     private func setupPhysics() {
@@ -100,6 +106,34 @@ extension GameScene {
     }
 }
 
+// MARK: - ObstaclesNode
+extension GameScene {
+    private func addObstacles() {
+        let piperPair = SKNode()
+        piperPair.position = CGPoint(x: 0.0, y: frame.midY)
+        piperPair.zPosition = 1.0
+        piperPair.name = "Pair"
+        
+        let size = CGSize(width: screenWidth, height: 50.0)
+        let pipe_1 = SKSpriteNode(color: .black, size: size)
+        pipe_1.position = CGPoint(x: -250, y: 0.0)
+        pipe_1.physicsBody = SKPhysicsBody(rectangleOf: size)
+        pipe_1.physicsBody?.isDynamic = false
+        pipe_1.physicsBody?.categoryBitMask = PhysicsCategories.Obstacles
+        
+        let pipe_2 = SKSpriteNode(color: .black, size: size)
+        pipe_2.position = CGPoint(x: pipe_1.position.x + size.width + 250, y: 0.0)
+        pipe_2.physicsBody = SKPhysicsBody(rectangleOf: size)
+        pipe_2.physicsBody?.isDynamic = false
+        pipe_2.physicsBody?.categoryBitMask = PhysicsCategories.Obstacles
+        
+        piperPair.addChild(pipe_1)
+        piperPair.addChild(pipe_2)
+        
+        obstaclesNode.addChild(piperPair)
+    }
+}
+
 // MARK: - GameOver
 extension GameScene {
     private func gameOver() {
@@ -115,7 +149,11 @@ extension GameScene: SKPhysicsContactDelegate {
         switch body.categoryBitMask {
         case PhysicsCategories.Wall:
             gameOver()
-        case PhysicsCategories.Side: print("Side")
+        case PhysicsCategories.Side:
+            playerNode.side()
+        case PhysicsCategories.Obstacles:
+            //gameOver()
+            print("Obstacles")
         default: break
         }
     }

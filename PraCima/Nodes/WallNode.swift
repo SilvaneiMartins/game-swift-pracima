@@ -30,7 +30,7 @@ class WallNode: SKNode {
 extension WallNode {
     private func setupPhysics() {
         let size = CGSize(width: screenWidth, height: 40.0)
-        node = SKSpriteNode(color: .red, size: size)
+        node = SKSpriteNode(color: .clear, size: size)
         node.physicsBody = SKPhysicsBody(rectangleOf: size)
         node.physicsBody?.isDynamic = false
         node.physicsBody?.mass = 100.0

@@ -30,7 +30,7 @@ class SideNode: SKNode {
 extension SideNode {
     private func setupPhysics() {
         let size = CGSize(width: 40.0, height: screenHeight)
-        node = SKSpriteNode(color: .red, size: size)
+        node = SKSpriteNode(color: .clear, size: size)
         node.physicsBody = SKPhysicsBody(rectangleOf: size)
         node.physicsBody?.isDynamic = false
         node.physicsBody?.friction = 1.0

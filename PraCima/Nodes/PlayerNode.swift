@@ -47,7 +47,7 @@ extension PlayerNode {
         player.physicsBody?.friction = 1.0
         player.physicsBody?.mass = 10.0
         player.physicsBody?.categoryBitMask = PhysicsCategories.Player
-        player.physicsBody?.contactTestBitMask = PhysicsCategories.Wall | PhysicsCategories.Side
+        player.physicsBody?.contactTestBitMask = PhysicsCategories.Wall | PhysicsCategories.Side | PhysicsCategories.Obstacles
         player.physicsBody?.collisionBitMask = PhysicsCategories.Side
         addChild(player)
     }
@@ -64,5 +64,9 @@ extension PlayerNode {
     internal func over() {
         player.fillColor = .red
         activate(false)
+    }
+    
+    internal func side() {
+        player.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 50.0))
     }
 }
