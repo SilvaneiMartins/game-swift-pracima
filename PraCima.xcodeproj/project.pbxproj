@@ -22,6 +22,7 @@
 		31D3BA9029BEC4C000ADD58E /* collision.wav in Resources */ = {isa = PBXBuildFile; fileRef = 31D3BA8929BEC4C000ADD58E /* collision.wav */; };
 		31D3BA9129BEC4C000ADD58E /* btn.wav in Resources */ = {isa = PBXBuildFile; fileRef = 31D3BA8A29BEC4C000ADD58E /* btn.wav */; };
 		31D3BA9229BEC4C000ADD58E /* score.wav in Resources */ = {isa = PBXBuildFile; fileRef = 31D3BA8B29BEC4C000ADD58E /* score.wav */; };
+		31D3BA9629BECE8E00ADD58E /* PlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D3BA9529BECE8E00ADD58E /* PlayerNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		31D3BA8A29BEC4C000ADD58E /* btn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = btn.wav; sourceTree = "<group>"; };
 		31D3BA8B29BEC4C000ADD58E /* score.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = score.wav; sourceTree = "<group>"; };
 		31D3BA9329BEC54100ADD58E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		31D3BA9529BECE8E00ADD58E /* PlayerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				31D3BA7E29BEC3FC00ADD58E /* Delegates */,
 				31D3BA6929BEC31E00ADD58E /* GameScene.sks */,
 				31D3BA6B29BEC31E00ADD58E /* Actions.sks */,
+				31D3BA9429BECE7600ADD58E /* Nodes */,
 				31D3BA7F29BEC41300ADD58E /* Scenes */,
 				31D3BA8029BEC42400ADD58E /* Controllers */,
 				31D3BA8129BEC44C00ADD58E /* Mains */,
@@ -148,6 +151,14 @@
 				31D3BA8B29BEC4C000ADD58E /* score.wav */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		31D3BA9429BECE7600ADD58E /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				31D3BA9529BECE8E00ADD58E /* PlayerNode.swift */,
+			);
+			path = Nodes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +243,7 @@
 			files = (
 				31D3BA6E29BEC31E00ADD58E /* GameScene.swift in Sources */,
 				31D3BA7029BEC31E00ADD58E /* GameViewController.swift in Sources */,
+				31D3BA9629BECE8E00ADD58E /* PlayerNode.swift in Sources */,
 				31D3BA6829BEC31E00ADD58E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
