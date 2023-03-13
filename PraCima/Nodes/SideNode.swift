@@ -35,7 +35,7 @@ extension SideNode {
         node.physicsBody?.isDynamic = false
         node.physicsBody?.friction = 1.0
         node.physicsBody?.restitution = 0.0
-        node.physicsBody?.categoryBitMask = 0
+        node.physicsBody?.categoryBitMask = PhysicsCategories.Side
         addChild(node)
     }
 }

@@ -28,3 +28,9 @@ var playableRect: CGRect {
     
     return CGRect(x: x, y: y, width: w, height: h)
 }
+
+struct PhysicsCategories {
+    static let Player: UInt32 = 0b1  // 2^0
+    static let Wall: UInt32 = 0b10  // 2^1
+    static let Side: UInt32 = 0b100  // 2^2
+}

@@ -73,6 +73,7 @@ extension GameScene {
     
     private func setupPhysics() {
         physicsWorld.gravity = CGVector(dx: 0.0, dy: -15.0)
+        physicsWorld.contactDelegate = self
     }
 }
 
@@ -96,5 +97,26 @@ extension GameScene {
         addChild(wallNode)
         addChild(leftNode)
         addChild(rightNode)
+    }
+}
+
+// MARK: - GameOver
+extension GameScene {
+    private func gameOver() {
+        playerNode.over()
+    }
+}
+
+// MARK: - SKPhysicsContactDelegate
+extension GameScene: SKPhysicsContactDelegate {
+    func didBegin(_ contact: SKPhysicsContact) {
+        let body = contact.bodyA.categoryBitMask == PhysicsCategories.Player ? contact.bodyB : contact.bodyA
+        
+        switch body.categoryBitMask {
+        case PhysicsCategories.Wall:
+            gameOver()
+        case PhysicsCategories.Side: print("Side")
+        default: break
+        }
     }
 }

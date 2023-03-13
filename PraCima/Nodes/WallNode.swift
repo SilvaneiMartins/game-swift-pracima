@@ -35,8 +35,8 @@ extension WallNode {
         node.physicsBody?.isDynamic = false
         node.physicsBody?.mass = 100.0
         node.physicsBody?.restitution = 1.0
-        node.physicsBody?.categoryBitMask = 0
-        node.physicsBody?.collisionBitMask = 0
+        node.physicsBody?.categoryBitMask = PhysicsCategories.Wall
+        node.physicsBody?.collisionBitMask = PhysicsCategories.Player
         addChild(node)
     }
 }
