@@ -10,6 +10,7 @@
 		3112D2BA29BF981D006C0AB7 /* WallNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3112D2B929BF981D006C0AB7 /* WallNode.swift */; };
 		3112D2BC29BF983F006C0AB7 /* SideNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3112D2BB29BF983F006C0AB7 /* SideNode.swift */; };
 		3112D2BF29BF99BA006C0AB7 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3112D2BE29BF99BA006C0AB7 /* Types.swift */; };
+		3112D2C129C1670E006C0AB7 /* HUDNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3112D2C029C1670E006C0AB7 /* HUDNode.swift */; };
 		31D3BA6829BEC31E00ADD58E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D3BA6729BEC31E00ADD58E /* AppDelegate.swift */; };
 		31D3BA6A29BEC31E00ADD58E /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 31D3BA6929BEC31E00ADD58E /* GameScene.sks */; };
 		31D3BA6C29BEC31E00ADD58E /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 31D3BA6B29BEC31E00ADD58E /* Actions.sks */; };
@@ -33,6 +34,7 @@
 		3112D2B929BF981D006C0AB7 /* WallNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallNode.swift; sourceTree = "<group>"; };
 		3112D2BB29BF983F006C0AB7 /* SideNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideNode.swift; sourceTree = "<group>"; };
 		3112D2BE29BF99BA006C0AB7 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
+		3112D2C029C1670E006C0AB7 /* HUDNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDNode.swift; sourceTree = "<group>"; };
 		31D3BA6429BEC31E00ADD58E /* PraCima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PraCima.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31D3BA6729BEC31E00ADD58E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31D3BA6929BEC31E00ADD58E /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				31D3BA9529BECE8E00ADD58E /* PlayerNode.swift */,
 				3112D2B929BF981D006C0AB7 /* WallNode.swift */,
 				3112D2BB29BF983F006C0AB7 /* SideNode.swift */,
+				3112D2C029C1670E006C0AB7 /* HUDNode.swift */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 				31D3BA9629BECE8E00ADD58E /* PlayerNode.swift in Sources */,
 				31D3BA6829BEC31E00ADD58E /* AppDelegate.swift in Sources */,
 				3112D2BA29BF981D006C0AB7 /* WallNode.swift in Sources */,
+				3112D2C129C1670E006C0AB7 /* HUDNode.swift in Sources */,
 				3112D2BC29BF983F006C0AB7 /* SideNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

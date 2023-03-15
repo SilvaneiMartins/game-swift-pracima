@@ -12,7 +12,7 @@ import GameplayKit
 class GameViewController: UIViewController {
 
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()        
         guard let view = self.view as? SKView else  {
                 return
         }

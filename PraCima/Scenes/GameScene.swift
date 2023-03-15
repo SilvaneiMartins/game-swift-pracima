@@ -14,6 +14,7 @@ class GameScene: SKScene {
     
     private let worldNode = SKNode()
     private var bgNode: SKSpriteNode!
+    private let hudNode = HUDNode()
     
     private let playerNode = PlayerNode(diff: 0)
     private let wallNode = WallNode()
@@ -57,7 +58,8 @@ class GameScene: SKScene {
         }
         
         obstaclesNode.children.forEach({
-            if $0.name == "Pair" {
+            let i = score - 2
+            if $0.name == "Pair \(i)" {
                 $0.removeFromParent()
                 print("removeFromParent")
             }
@@ -75,6 +77,9 @@ extension GameScene {
         
         // TODO: - BackgroundNode
         addBG()
+        
+        // TODO: - HUDNode
+        addChild(hudNode)
         
         // TODO: - WorldNode
         addChild(worldNode)
@@ -180,8 +185,11 @@ extension GameScene: SKPhysicsContactDelegate {
             //gameOver()
             print("Obstacles")
         case PhysicsCategories.Score:
-            score += 1
-            print("Score \(score)")
+            if let node = body.node {
+                score += 1
+                hudNode.updateScore(score)
+                node.removeFromParent()
+            }
         default: break
         }
     }
