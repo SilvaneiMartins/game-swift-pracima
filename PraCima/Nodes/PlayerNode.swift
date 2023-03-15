@@ -47,7 +47,7 @@ extension PlayerNode {
         player.physicsBody?.friction = 1.0
         player.physicsBody?.mass = 10.0
         player.physicsBody?.categoryBitMask = PhysicsCategories.Player
-        player.physicsBody?.contactTestBitMask = PhysicsCategories.Wall | PhysicsCategories.Side | PhysicsCategories.Obstacles
+        player.physicsBody?.contactTestBitMask = PhysicsCategories.Wall | PhysicsCategories.Side | PhysicsCategories.Obstacles | PhysicsCategories.Score
         player.physicsBody?.collisionBitMask = PhysicsCategories.Side
         addChild(player)
     }

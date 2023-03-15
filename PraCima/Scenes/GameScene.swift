@@ -24,6 +24,7 @@ class GameScene: SKScene {
     private var firstTap = true
     private var posY: CGFloat = 0.0
     private var pairNum = 0
+    private var score = 0
     
     // MARK: - Lifecycle
     
@@ -54,6 +55,13 @@ class GameScene: SKScene {
         if posY - playerNode.height() < frame.midY {
             addObstacles()
         }
+        
+        obstaclesNode.children.forEach({
+            if $0.name == "Pair" {
+                $0.removeFromParent()
+                print("removeFromParent")
+            }
+        })
     }
 }
 
@@ -136,8 +144,15 @@ extension GameScene {
         pipe_2.physicsBody?.isDynamic = false
         pipe_2.physicsBody?.categoryBitMask = PhysicsCategories.Obstacles
         
+        let score = SKNode()
+        score.position = CGPoint(x: 0.0, y: size.height)
+        score.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: size.width * 2, height: size.height))
+        score.physicsBody?.isDynamic = false
+        score.physicsBody?.categoryBitMask = PhysicsCategories.Score
+        
         piperPair.addChild(pipe_1)
         piperPair.addChild(pipe_2)
+        piperPair.addChild(score)
         
         obstaclesNode.addChild(piperPair)
         posY += frame.midY * 0.7
@@ -164,6 +179,9 @@ extension GameScene: SKPhysicsContactDelegate {
         case PhysicsCategories.Obstacles:
             //gameOver()
             print("Obstacles")
+        case PhysicsCategories.Score:
+            score += 1
+            print("Score \(score)")
         default: break
         }
     }
