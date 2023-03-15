@@ -168,6 +168,7 @@ extension GameScene {
 extension GameScene {
     private func gameOver() {
         playerNode.over()
+        hudNode.setupGameOver()
     }
 }
 

@@ -13,6 +13,9 @@ class HUDNode: SKNode {
     private var topScoreShape: SKShapeNode!
     private var topScoreLbl: SKLabelNode!
     
+    private var gameOverShape: SKShapeNode!
+    private var gameOverNode: SKSpriteNode!
+    
     // MARK: - Initializes
     override init() {
         super.init()
@@ -57,5 +60,18 @@ extension HUDNode {
 
 // MARK: - GameOver
 extension HUDNode {
-     
+    func setupGameOver() {
+        gameOverShape = SKShapeNode(rect: CGRect(x: 0.0, y: 0.0, width: screenWidth, height: screenHeight))
+        gameOverShape.zPosition = 49.0
+        gameOverShape.fillColor = UIColor(hex: 0x000000, alpha: 0.7)
+        addChild(gameOverShape)
+        
+        let scale: CGFloat = appDL.isIphoneX ? 0.6 : 0.7
+        
+        gameOverNode = SKSpriteNode(imageNamed: "panel-gameOver")
+        gameOverNode.setScale(scale)
+        gameOverNode.zPosition = 50.0
+        gameOverNode.position = CGPoint(x: screenWidth/2, y: screenHeight/2)
+        addChild(gameOverNode)
+    }
 }
