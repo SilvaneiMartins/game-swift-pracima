@@ -29,6 +29,8 @@ class GameScene: SKScene {
     
     private let easeScoreKey = "EaseScoreKey"
     
+    private let requestScore = 50
+    
     // MARK: - Lifecycle
     
     override func didMove(to view: SKView) {
@@ -133,6 +135,8 @@ extension GameScene {
 // MARK: - ObstaclesNode
 extension GameScene {
     private func addObstacles() {
+        let randomX = CGFloat(arc4random() % UInt32(playableRect.width / 2))
+        
         let piperPair = SKNode()
         piperPair.position = CGPoint(x: 0.0, y: posY)
         piperPair.zPosition = 1.0
@@ -142,7 +146,7 @@ extension GameScene {
         
         let size = CGSize(width: screenWidth, height: 50.0)
         let pipe_1 = SKSpriteNode(color: .black, size: size)
-        pipe_1.position = CGPoint(x: -250, y: 0.0)
+        pipe_1.position = CGPoint(x: randomX - 250, y: 0.0)
         pipe_1.physicsBody = SKPhysicsBody(rectangleOf: size)
         pipe_1.physicsBody?.isDynamic = false
         pipe_1.physicsBody?.categoryBitMask = PhysicsCategories.Obstacles
@@ -168,7 +172,7 @@ extension GameScene {
     }
 }
 
-// MARK: - GameOver
+// MARK: - GameState
 extension GameScene {
     private func gameOver() {
         playerNode.over()
@@ -178,7 +182,13 @@ extension GameScene {
             highscore = score
         }
         
-        hudNode.setupGameOver(score, score)
+        hudNode.setupGameOver(score, highscore)
+    }
+    
+    private func success() {
+        if score >= requestScore {
+            playerNode.activate(false)
+        }
     }
 }
 
@@ -193,8 +203,7 @@ extension GameScene: SKPhysicsContactDelegate {
         case PhysicsCategories.Side:
             playerNode.side()
         case PhysicsCategories.Obstacles:
-            //gameOver()
-            print("Obstacles")
+            gameOver()
         case PhysicsCategories.Score:
             if let node = body.node {
                 score += 1
@@ -206,6 +215,7 @@ extension GameScene: SKPhysicsContactDelegate {
                 }
                 
                 node.removeFromParent()
+                success()
             }
         default: break
         }
