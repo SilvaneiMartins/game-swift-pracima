@@ -19,6 +19,14 @@ class HUDNode: SKNode {
     private var homeNode: SKSpriteNode!
     private var againNode: SKSpriteNode!
     
+    private var scoreTitleLbl: SKLabelNode!
+    private var scoreLbl: SKLabelNode!
+    private var highscoreTitleLbl: SKLabelNode!
+    private var highscoreLbl: SKLabelNode!
+    
+    var easeScene: GameScene?
+    var skView: SKView!
+    
     private var isHome = false {
         didSet {
             updateBtn(node: homeNode, event: isHome)
@@ -64,7 +72,12 @@ class HUDNode: SKNode {
         
         if isAgain {
             isAgain = false
-            print("PlayAgain")
+            
+            if let _ = easeScene {
+                let scene = GameScene(size: CGSize(width: screenWidth, height: screenHeight))
+                scene.scaleMode = .aspectFill
+                skView.presentScene(scene, transition: .doorway(withDuration: 1.5))
+            }
         }
     }
     
@@ -124,7 +137,7 @@ extension HUDNode {
 
 // MARK: - GameOver
 extension HUDNode {
-    func setupGameOver() {
+    func setupGameOver(_ score: Int, _ highscore: Int) {
         gameOverShape = SKShapeNode(rect: CGRect(x: 0.0, y: 0.0, width: screenWidth, height: screenHeight))
         gameOverShape.zPosition = 49.0
         gameOverShape.fillColor = UIColor(hex: 0x000000, alpha: 0.7)
@@ -161,5 +174,53 @@ extension HUDNode {
         )
         againNode.name = "PlayAgain"
         addChild(againNode)
+        
+        // TODO: - ScoreTitleLbl
+        scoreTitleLbl = SKLabelNode(fontNamed: FontName.wheaton)
+        scoreTitleLbl.fontSize = 60.0
+        scoreTitleLbl.text = "Score: "
+        scoreTitleLbl.fontColor = .white
+        scoreTitleLbl.zPosition = 55.0
+        scoreTitleLbl.position = CGPoint(
+            x: gameOverNode.frame.minX + scoreTitleLbl.frame.width / 2 + 30,
+            y: screenHeight / 2
+        )
+        addChild(scoreTitleLbl)
+        
+        // TODO: - ScoreLbl
+        scoreLbl = SKLabelNode(fontNamed: FontName.wheaton)
+        scoreLbl.fontSize = 60.0
+        scoreLbl.text = "\(score)"
+        scoreLbl.fontColor = .white
+        scoreLbl.zPosition = 55.0
+        scoreLbl.position = CGPoint(
+            x: gameOverNode.frame.maxX - scoreLbl.frame.width / 2 - 30,
+            y: scoreTitleLbl.position.y
+        )
+        addChild(scoreLbl)
+        
+        // TODO: - HighScoreTitleLbl
+        highscoreTitleLbl = SKLabelNode(fontNamed: FontName.wheaton)
+        highscoreTitleLbl.fontSize = 60.0
+        highscoreTitleLbl.text = "HighScore: "
+        highscoreTitleLbl.fontColor = .white
+        highscoreTitleLbl.zPosition = 55.0
+        highscoreTitleLbl.position = CGPoint(
+            x: gameOverNode.frame.minX + highscoreTitleLbl.frame.width / 2 + 30,
+            y: screenHeight / 2 - highscoreTitleLbl.frame.height * 2
+        )
+        addChild(highscoreTitleLbl)
+        
+        // TODO: - HighScoreTitleLbl
+        highscoreLbl = SKLabelNode(fontNamed: FontName.wheaton)
+        highscoreLbl.fontSize = 60.0
+        highscoreLbl.text = "\(highscore)"
+        highscoreLbl.fontColor = .white
+        highscoreLbl.zPosition = 55.0
+        highscoreLbl.position = CGPoint(
+            x: gameOverNode.frame.maxX - highscoreLbl.frame.width / 2 - 30,
+            y: highscoreTitleLbl.position.y
+        )
+        addChild(highscoreLbl)
     }
 }

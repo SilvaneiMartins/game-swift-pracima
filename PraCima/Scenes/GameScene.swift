@@ -27,6 +27,8 @@ class GameScene: SKScene {
     private var pairNum = 0
     private var score = 0
     
+    private let easeScoreKey = "EaseScoreKey"
+    
     // MARK: - Lifecycle
     
     override func didMove(to view: SKView) {
@@ -80,6 +82,8 @@ extension GameScene {
         
         // TODO: - HUDNode
         addChild(hudNode)
+        hudNode.skView = view
+        hudNode.easeScene = self
         
         // TODO: - WorldNode
         addChild(worldNode)
@@ -168,7 +172,13 @@ extension GameScene {
 extension GameScene {
     private func gameOver() {
         playerNode.over()
-        hudNode.setupGameOver()
+        
+        var highscore = UserDefaults.standard.integer(forKey: easeScoreKey)
+        if score > highscore {
+            highscore = score
+        }
+        
+        hudNode.setupGameOver(score, score)
     }
 }
 
@@ -189,6 +199,12 @@ extension GameScene: SKPhysicsContactDelegate {
             if let node = body.node {
                 score += 1
                 hudNode.updateScore(score)
+                
+                let highscore = UserDefaults.standard.integer(forKey: easeScoreKey)
+                if score > highscore {
+                    UserDefaults.standard.set(score, forKey: easeScoreKey)
+                }
+                
                 node.removeFromParent()
             }
         default: break
