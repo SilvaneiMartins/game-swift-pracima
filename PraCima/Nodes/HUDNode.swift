@@ -19,6 +19,18 @@ class HUDNode: SKNode {
     private var homeNode: SKSpriteNode!
     private var againNode: SKSpriteNode!
     
+    private var isHome = false {
+        didSet {
+            updateBtn(node: homeNode, event: isHome)
+        }
+    }
+    
+    private var isAgain = false {
+        didSet {
+            updateBtn(node: againNode, event: isAgain)
+        }
+    }
+    
     // MARK: - Initializes
     override init() {
         super.init()
@@ -28,10 +40,59 @@ class HUDNode: SKNode {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        guard let touch = touches.first else { return }
+        let node = atPoint(touch.location(in: self))
+        
+        if node.name == "Home" && !isHome {
+            isHome = true
+        }
+        
+        if node.name == "PlayAgain" && !isAgain {
+            isAgain = true
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        if isHome {
+            isHome = false
+            print("Home")
+        }
+        
+        if isAgain {
+            isAgain = false
+            print("PlayAgain")
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        guard let touch = touches.first else { return }
+        
+        if let parent = homeNode?.parent {
+            isHome = homeNode.contains(touch.location(in: parent))
+        }
+        
+        if let parent = againNode?.parent {
+            isAgain = againNode.contains(touch.location(in: parent))
+        }
+    }
 }
 
 // MARK: - Setups
 extension HUDNode {
+    private func updateBtn(node: SKNode, event: Bool) {
+        var alpha: CGFloat = 1.0
+        if event {
+            alpha = 0.5
+        }
+        
+        node.run(.fadeAlpha(to: alpha, duration: 0.1))
+    }
+    
     private func setupTopScore() {
         let statusH: CGFloat = appDL.isIphoneX ? 88 : 40
         let scoreY: CGFloat = screenHeight - (statusH + 90/2 + 20)
@@ -69,6 +130,7 @@ extension HUDNode {
         gameOverShape.fillColor = UIColor(hex: 0x000000, alpha: 0.7)
         addChild(gameOverShape)
         
+        isUserInteractionEnabled = true
         let scale: CGFloat = appDL.isIphoneX ? 0.6 : 0.7
         
         // TODO: - GameOverNode
