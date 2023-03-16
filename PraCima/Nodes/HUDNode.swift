@@ -16,6 +16,9 @@ class HUDNode: SKNode {
     private var gameOverShape: SKShapeNode!
     private var gameOverNode: SKSpriteNode!
     
+    private var homeNode: SKSpriteNode!
+    private var againNode: SKSpriteNode!
+    
     // MARK: - Initializes
     override init() {
         super.init()
@@ -68,10 +71,33 @@ extension HUDNode {
         
         let scale: CGFloat = appDL.isIphoneX ? 0.6 : 0.7
         
+        // TODO: - GameOverNode
         gameOverNode = SKSpriteNode(imageNamed: "panel-gameOver")
         gameOverNode.setScale(scale)
         gameOverNode.zPosition = 50.0
         gameOverNode.position = CGPoint(x: screenWidth/2, y: screenHeight/2)
         addChild(gameOverNode)
+        
+        // TODO: - HomeNode
+        homeNode = SKSpriteNode(imageNamed: "icon-home")
+        homeNode.setScale(scale)
+        homeNode.zPosition = 55.0
+        homeNode.position = CGPoint(
+            x: gameOverNode.frame.minX + homeNode.frame.width / 2 + 30,
+            y: gameOverNode.frame.minY + homeNode.frame.height / 2 + 30
+        )
+        homeNode.name = "Home"
+        addChild(homeNode)
+        
+        // TODO: - PlayerAgainNode
+        againNode = SKSpriteNode(imageNamed: "icon-playAgain")
+        againNode.setScale(scale)
+        againNode.zPosition = 55.0
+        againNode.position = CGPoint(
+            x: gameOverNode.frame.maxX - homeNode.frame.width / 2 -  30,
+            y: gameOverNode.frame.minY + homeNode.frame.height / 2 + 30
+        )
+        againNode.name = "PlayAgain"
+        addChild(againNode)
     }
 }
