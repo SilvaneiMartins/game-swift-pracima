@@ -39,4 +39,18 @@ extension SuperScoreNode {
         node.physicsBody?.categoryBitMask = PhysicsCategories.SuperScore
         addChild(node)
     }
+    
+    func bounce() {
+        let isRepeat = SKAction.repeat(.sequence([
+            .scale(to: scale * 0.85, duration: 0.1 ),
+            .scale(to: scale * 1.0, duration: 0.1)
+        ]), count: 2)
+        
+        run(.wait(forDuration: 0.5)) {
+            self.node.run(.repeatForever(.sequence([
+                isRepeat,
+                .wait(forDuration: 1.5)
+            ])))
+        }
+    }
 }

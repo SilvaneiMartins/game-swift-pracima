@@ -169,18 +169,22 @@ extension GameScene {
         
         obstaclesNode.addChild(piperPair)
         
-        addSuperScore()
+        switch arc4random_uniform(100) {
+        case 0...80: break
+        default: addSuperScore()
+        }
         
         posY += frame.midY * 0.7
     }
     
     private func addSuperScore() {
         let node = SuperScoreNode()
-        let randomX = playableRect.midX
-        let randomY = playableRect.midY
+        let randomX = playableRect.midX + CGFloat(arc4random_uniform(UInt32(playableRect.width / 2))) + node.frame.width
+        let randomY = posY + CGFloat(arc4random_uniform(UInt32(posY * 0.5))) + node.frame.height
         node.position = CGPoint(x: randomX, y: randomY)
         
         worldNode.addChild(node)
+        node.bounce()
     }
 }
 
@@ -216,9 +220,23 @@ extension GameScene: SKPhysicsContactDelegate {
             playerNode.side()
         case PhysicsCategories.Obstacles:
             gameOver()
+            //print("Obstaculos")
         case PhysicsCategories.Score:
             if let node = body.node {
                 score += 1
+                hudNode.updateScore(score)
+                
+                let highscore = UserDefaults.standard.integer(forKey: easeScoreKey)
+                if score > highscore {
+                    UserDefaults.standard.set(score, forKey: easeScoreKey)
+                }
+                
+                node.removeFromParent()
+                success()
+            }
+        case PhysicsCategories.SuperScore:
+            if let node = body.node {
+                score += 5
                 hudNode.updateScore(score)
                 
                 let highscore = UserDefaults.standard.integer(forKey: easeScoreKey)
