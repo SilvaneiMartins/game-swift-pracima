@@ -24,6 +24,9 @@ class HUDNode: SKNode {
     private var highscoreTitleLbl: SKLabelNode!
     private var highscoreLbl: SKLabelNode!
     
+    private var continueNode: SKSpriteNode!
+    private var nextNode: SKSpriteNode!
+    
     var easeScene: GameScene?
     var skView: SKView!
     
@@ -36,6 +39,18 @@ class HUDNode: SKNode {
     private var isAgain = false {
         didSet {
             updateBtn(node: againNode, event: isAgain)
+        }
+    }
+    
+    private var isContinue = false {
+        didSet {
+            updateBtn(node: continueNode, event: isContinue)
+        }
+    }
+    
+    private var isNext = false {
+        didSet {
+            updateBtn(node: nextNode, event: isNext)
         }
     }
     
@@ -61,6 +76,14 @@ class HUDNode: SKNode {
         if node.name == "PlayAgain" && !isAgain {
             isAgain = true
         }
+        
+        if node.name == "Continue" && !isContinue {
+            isContinue = true
+        }
+        
+        if node.name == "Next" && !isNext {
+            isNext = true
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -79,6 +102,21 @@ class HUDNode: SKNode {
                 skView.presentScene(scene, transition: .doorway(withDuration: 1.5))
             }
         }
+        
+        if isContinue {
+            isContinue = false
+            removeNode()
+        }
+        
+        if isNext {
+            isNext = false
+            
+            if let _ = easeScene {
+                //let scene = GameScene(size: CGSize(width: screenWidth, height: screenHeight))
+                //scene.scaleMode = .aspectFill
+                //skView.presentScene(scene, transition: .doorway(withDuration: 1.5))
+            }
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -91,6 +129,14 @@ class HUDNode: SKNode {
         
         if let parent = againNode?.parent {
             isAgain = againNode.contains(touch.location(in: parent))
+        }
+        
+        if let parent = continueNode?.parent {
+            isContinue = continueNode.contains(touch.location(in: parent))
+        }
+        
+        if let parent = nextNode?.parent {
+            isNext = nextNode.contains(touch.location(in: parent))
         }
     }
 }
@@ -132,26 +178,45 @@ extension HUDNode {
             .scale(to: 1.0, duration: 0.1),
         ]))
     }
+    
+    private func removeNode() {
+        gameOverShape?.removeFromParent()
+        gameOverNode?.removeFromParent()
+        continueNode?.removeFromParent()
+        nextNode?.removeFromParent()
+    }
 }
  
 
 // MARK: - GameOver
 extension HUDNode {
-    func setupGameOver(_ score: Int, _ highscore: Int) {
+    
+    private func createGameOverShape() {
         gameOverShape = SKShapeNode(rect: CGRect(x: 0.0, y: 0.0, width: screenWidth, height: screenHeight))
         gameOverShape.zPosition = 49.0
         gameOverShape.fillColor = UIColor(hex: 0x000000, alpha: 0.7)
         addChild(gameOverShape)
+    }
+    
+    private func createGamePanel(_ name: String) {
+        let scale: CGFloat = appDL.isIphoneX ? 0.6 : 0.7
+        
+        // TODO: - GameOverNode
+        gameOverNode = SKSpriteNode(imageNamed: name)
+        gameOverNode.setScale(scale)
+        gameOverNode.zPosition = 50.0
+        gameOverNode.position = CGPoint(x: screenWidth/2, y: screenHeight/2)
+        addChild(gameOverNode)
+    }
+    
+    func setupGameOver(_ score: Int, _ highscore: Int) {
+        createGameOverShape()
         
         isUserInteractionEnabled = true
         let scale: CGFloat = appDL.isIphoneX ? 0.6 : 0.7
         
         // TODO: - GameOverNode
-        gameOverNode = SKSpriteNode(imageNamed: "panel-gameOver")
-        gameOverNode.setScale(scale)
-        gameOverNode.zPosition = 50.0
-        gameOverNode.position = CGPoint(x: screenWidth/2, y: screenHeight/2)
-        addChild(gameOverNode)
+        createGamePanel("panel-gameOver")
         
         // TODO: - HomeNode
         homeNode = SKSpriteNode(imageNamed: "icon-home")
@@ -222,5 +287,41 @@ extension HUDNode {
             y: highscoreTitleLbl.position.y
         )
         addChild(highscoreLbl)
+    }
+}
+
+
+// MARK: - Success
+extension HUDNode {
+    func setupSuccess() {
+        createGameOverShape()
+        
+        isUserInteractionEnabled = true
+        let scale: CGFloat = appDL.isIphoneX ? 0.6 : 0.7
+        
+        // TODO: - GameOverNode
+        createGamePanel("panel-success")
+        
+        // TODO: - ContinueNode
+        continueNode = SKSpriteNode(imageNamed: "icon-continue")
+        continueNode.setScale(scale)
+        continueNode.zPosition = 55.0
+        continueNode.position = CGPoint(
+            x: gameOverNode.frame.minX + continueNode.frame.width / 2 + 30,
+            y: gameOverNode.frame.minY + continueNode.frame.height / 2 + 30
+        )
+        continueNode.name = "Continuar"
+        addChild(continueNode)
+        
+        // TODO: - NextNode
+        nextNode = SKSpriteNode(imageNamed: "icon-next")
+        nextNode.setScale(scale)
+        nextNode.zPosition = 55.0
+        nextNode.position = CGPoint(
+            x: gameOverNode.frame.maxX - nextNode.frame.width / 2 -  30,
+            y: gameOverNode.frame.minY + nextNode.frame.height / 2 + 30
+        )
+        nextNode.name = "Próximo"
+        addChild(nextNode)
     }
 }

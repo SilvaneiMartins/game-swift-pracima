@@ -204,6 +204,7 @@ extension GameScene {
     private func success() {
         if score >= requestScore {
             playerNode.activate(false)
+            hudNode.setupSuccess()
         }
     }
 }
@@ -219,8 +220,8 @@ extension GameScene: SKPhysicsContactDelegate {
         case PhysicsCategories.Side:
             playerNode.side()
         case PhysicsCategories.Obstacles:
-            gameOver()
-            //print("Obstaculos")
+            //gameOver()
+            print("Obstaculos")
         case PhysicsCategories.Score:
             if let node = body.node {
                 score += 1
