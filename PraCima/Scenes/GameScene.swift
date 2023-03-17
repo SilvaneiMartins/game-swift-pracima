@@ -168,7 +168,19 @@ extension GameScene {
         piperPair.addChild(score)
         
         obstaclesNode.addChild(piperPair)
+        
+        addSuperScore()
+        
         posY += frame.midY * 0.7
+    }
+    
+    private func addSuperScore() {
+        let node = SuperScoreNode()
+        let randomX = playableRect.midX
+        let randomY = playableRect.midY
+        node.position = CGPoint(x: randomX, y: randomY)
+        
+        worldNode.addChild(node)
     }
 }
 
