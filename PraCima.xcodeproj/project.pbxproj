@@ -11,11 +11,15 @@
 		3112D2BC29BF983F006C0AB7 /* SideNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3112D2BB29BF983F006C0AB7 /* SideNode.swift */; };
 		3112D2BF29BF99BA006C0AB7 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3112D2BE29BF99BA006C0AB7 /* Types.swift */; };
 		3112D2C129C1670E006C0AB7 /* HUDNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3112D2C029C1670E006C0AB7 /* HUDNode.swift */; };
+		314794A429CA4A58003FCFB8 /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314794A329CA4A58003FCFB8 /* ColorModel.swift */; };
+		314794A629CA50E6003FCFB8 /* MediumScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314794A529CA50E6003FCFB8 /* MediumScene.swift */; };
+		314794A829CA6D89003FCFB8 /* HardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314794A729CA6D89003FCFB8 /* HardScene.swift */; };
+		314794AA29CA73DC003FCFB8 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314794A929CA73DB003FCFB8 /* MainMenu.swift */; };
 		31BABF0129C405220015096B /* SuperScoreNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BABF0029C405220015096B /* SuperScoreNode.swift */; };
 		31D3BA6829BEC31E00ADD58E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D3BA6729BEC31E00ADD58E /* AppDelegate.swift */; };
 		31D3BA6A29BEC31E00ADD58E /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 31D3BA6929BEC31E00ADD58E /* GameScene.sks */; };
 		31D3BA6C29BEC31E00ADD58E /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 31D3BA6B29BEC31E00ADD58E /* Actions.sks */; };
-		31D3BA6E29BEC31E00ADD58E /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D3BA6D29BEC31E00ADD58E /* GameScene.swift */; };
+		31D3BA6E29BEC31E00ADD58E /* EaseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D3BA6D29BEC31E00ADD58E /* EaseScene.swift */; };
 		31D3BA7029BEC31E00ADD58E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D3BA6F29BEC31E00ADD58E /* GameViewController.swift */; };
 		31D3BA7329BEC31E00ADD58E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31D3BA7129BEC31E00ADD58E /* Main.storyboard */; };
 		31D3BA7529BEC32100ADD58E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31D3BA7429BEC32100ADD58E /* Assets.xcassets */; };
@@ -36,12 +40,16 @@
 		3112D2BB29BF983F006C0AB7 /* SideNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideNode.swift; sourceTree = "<group>"; };
 		3112D2BE29BF99BA006C0AB7 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		3112D2C029C1670E006C0AB7 /* HUDNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDNode.swift; sourceTree = "<group>"; };
+		314794A329CA4A58003FCFB8 /* ColorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorModel.swift; sourceTree = "<group>"; };
+		314794A529CA50E6003FCFB8 /* MediumScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumScene.swift; sourceTree = "<group>"; };
+		314794A729CA6D89003FCFB8 /* HardScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardScene.swift; sourceTree = "<group>"; };
+		314794A929CA73DB003FCFB8 /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 		31BABF0029C405220015096B /* SuperScoreNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperScoreNode.swift; sourceTree = "<group>"; };
 		31D3BA6429BEC31E00ADD58E /* PraCima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PraCima.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31D3BA6729BEC31E00ADD58E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31D3BA6929BEC31E00ADD58E /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		31D3BA6B29BEC31E00ADD58E /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
-		31D3BA6D29BEC31E00ADD58E /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		31D3BA6D29BEC31E00ADD58E /* EaseScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EaseScene.swift; sourceTree = "<group>"; };
 		31D3BA6F29BEC31E00ADD58E /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		31D3BA7229BEC31E00ADD58E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		31D3BA7429BEC32100ADD58E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -73,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				3112D2BE29BF99BA006C0AB7 /* Types.swift */,
+				314794A329CA4A58003FCFB8 /* ColorModel.swift */,
 			);
 			path = MyUtils;
 			sourceTree = "<group>";
@@ -121,7 +130,10 @@
 		31D3BA7F29BEC41300ADD58E /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				31D3BA6D29BEC31E00ADD58E /* GameScene.swift */,
+				31D3BA6D29BEC31E00ADD58E /* EaseScene.swift */,
+				314794A529CA50E6003FCFB8 /* MediumScene.swift */,
+				314794A729CA6D89003FCFB8 /* HardScene.swift */,
+				314794A929CA73DB003FCFB8 /* MainMenu.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -275,15 +287,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31D3BA6E29BEC31E00ADD58E /* GameScene.swift in Sources */,
+				31D3BA6E29BEC31E00ADD58E /* EaseScene.swift in Sources */,
 				31D3BA7029BEC31E00ADD58E /* GameViewController.swift in Sources */,
 				31D3BA9929BED40B00ADD58E /* UIColor+Ext.swift in Sources */,
 				3112D2BF29BF99BA006C0AB7 /* Types.swift in Sources */,
 				31D3BA9629BECE8E00ADD58E /* PlayerNode.swift in Sources */,
 				31D3BA6829BEC31E00ADD58E /* AppDelegate.swift in Sources */,
 				3112D2BA29BF981D006C0AB7 /* WallNode.swift in Sources */,
+				314794A629CA50E6003FCFB8 /* MediumScene.swift in Sources */,
 				3112D2C129C1670E006C0AB7 /* HUDNode.swift in Sources */,
+				314794AA29CA73DC003FCFB8 /* MainMenu.swift in Sources */,
 				31BABF0129C405220015096B /* SuperScoreNode.swift in Sources */,
+				314794A429CA4A58003FCFB8 /* ColorModel.swift in Sources */,
+				314794A829CA6D89003FCFB8 /* HardScene.swift in Sources */,
 				3112D2BC29BF983F006C0AB7 /* SideNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -31,7 +31,9 @@ class HUDNode: SKNode {
     private var panelTitleLbl: SKLabelNode!
     private var panelSubLbl: SKLabelNode!
     
-    var easeScene: GameScene?
+    var easeScene: EaseScene?
+    var mediumScene: MediumScene?
+    var hardScene: HardScene?
     var skView: SKView!
     
     private var isHome = false {
@@ -111,7 +113,19 @@ class HUDNode: SKNode {
             isAgain = false
             
             if let _ = easeScene {
-                let scene = GameScene(size: CGSize(width: screenWidth, height: screenHeight))
+                let scene = EaseScene(size: CGSize(width: screenWidth, height: screenHeight))
+                scene.scaleMode = .aspectFill
+                skView.presentScene(scene, transition: .doorway(withDuration: 1.5))
+            }
+            
+            if let _ = mediumScene {
+                let scene = MediumScene(size: CGSize(width: screenWidth, height: screenHeight))
+                scene.scaleMode = .aspectFill
+                skView.presentScene(scene, transition: .doorway(withDuration: 1.5))
+            }
+            
+            if let _ = hardScene {
+                let scene = HardScene(size: CGSize(width: screenWidth, height: screenHeight))
                 scene.scaleMode = .aspectFill
                 skView.presentScene(scene, transition: .doorway(withDuration: 1.5))
             }
@@ -127,9 +141,15 @@ class HUDNode: SKNode {
             isNext = false
             
             if let _ = easeScene {
-                //let scene = GameScene(size: CGSize(width: screenWidth, height: screenHeight))
-                //scene.scaleMode = .aspectFill
-                //skView.presentScene(scene, transition: .doorway(withDuration: 1.5))
+                let scene = MediumScene(size: CGSize(width: screenWidth, height: screenHeight))
+                scene.scaleMode = .aspectFill
+                skView.presentScene(scene, transition: .doorway(withDuration: 1.5))
+            }
+            
+            if let _ = mediumScene {
+                let scene = HardScene(size: CGSize(width: screenWidth, height: screenHeight))
+                scene.scaleMode = .aspectFill
+                skView.presentScene(scene, transition: .doorway(withDuration: 1.5))
             }
         }
         
@@ -365,7 +385,7 @@ extension HUDNode {
         createGamePanel("panel")
         
         // TODO: - PanelNode
-        panelNode = SKSpriteNode(imageNamed: "icon-next")
+        panelNode = SKSpriteNode(imageNamed: btnName)
         panelNode.setScale(scale)
         panelNode.zPosition = 55.0
         panelNode.position = CGPoint(

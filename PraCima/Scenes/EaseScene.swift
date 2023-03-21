@@ -8,7 +8,7 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class EaseScene: SKScene {
     
     // MARK: - Properties
     
@@ -27,8 +27,18 @@ class GameScene: SKScene {
     private var pairNum = 0
     private var score = 0
     
-    private let easeNotifyKey = "EaseNotifyKey"
-    private let easeScoreKey = "EaseScoreKey"
+    lazy var colors: [ColorModel] = {
+        return ColorModel.share()
+    }()
+    
+    private let jumpSound = SKAction.playSoundFileNamed(SoundName.jump, waitForCompletion: false)
+    private let superScoreSound = SKAction.playSoundFileNamed(SoundName.superScore, waitForCompletion: false)
+    private let btnSound = SKAction.playSoundFileNamed(SoundName.btn, waitForCompletion: false)
+    private let scoreSound = SKAction.playSoundFileNamed(SoundName.score, waitForCompletion: false)
+    private let collisionSound = SKAction.playSoundFileNamed(SoundName.collision, waitForCompletion: false)
+    
+    private let notifyKey = "EaseNotifyKey"
+    private let scoreKey = "EaseScoreKey"
     
     private let requestScore = 50
     private let btnName = "icon-letsGo"
@@ -59,6 +69,7 @@ Boa sorte!!!
         let right = !(location.x > frame.width / 2)
         
         playerNode.jump(right)
+        run(jumpSound)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -83,7 +94,7 @@ Boa sorte!!!
 
 // MARK: - Setups
 
-extension GameScene {
+extension EaseScene {
     private func setupNodes() {
         backgroundColor = .white
         setupPhysics()
@@ -96,8 +107,8 @@ extension GameScene {
         hudNode.skView = view
         hudNode.easeScene = self
         
-        if !UserDefaults.standard.bool(forKey: easeNotifyKey) {
-            UserDefaults.standard.set(true, forKey: easeNotifyKey)
+        if !UserDefaults.standard.bool(forKey: notifyKey) {
+            UserDefaults.standard.set(true, forKey: notifyKey)
             hudNode.setupPanel(subTxt: subTxt, titleTxt: titleTxt, btnName: btnName)
         }
         
@@ -125,7 +136,7 @@ extension GameScene {
 }
 
 // MARK: - BackgroundNode
-extension GameScene {
+extension EaseScene {
     private func addBG() {
         bgNode = SKSpriteNode(imageNamed: "background")
         bgNode.zPosition = -1.0
@@ -135,7 +146,7 @@ extension GameScene {
 }
 
 // MARK: - WallNode
-extension GameScene {
+extension EaseScene {
     private func addWall() {
         wallNode.position = CGPoint(x: frame.midX, y: 0.0)
         leftNode.position = CGPoint(x: playableRect.minX, y: frame.midY)
@@ -148,8 +159,9 @@ extension GameScene {
 }
 
 // MARK: - ObstaclesNode
-extension GameScene {
+extension EaseScene {
     private func addObstacles() {
+        let model = colors[Int(arc4random_uniform(UInt32(colors.count - 1)))]
         let randomX = CGFloat(arc4random() % UInt32(playableRect.width / 2))
         
         let piperPair = SKNode()
@@ -160,13 +172,13 @@ extension GameScene {
         piperPair.name = "Pair\(pairNum)"
         
         let size = CGSize(width: screenWidth, height: 50.0)
-        let pipe_1 = SKSpriteNode(color: .black, size: size)
+        let pipe_1 = SKSpriteNode(color: model.color, size: size)
         pipe_1.position = CGPoint(x: randomX - 250, y: 0.0)
         pipe_1.physicsBody = SKPhysicsBody(rectangleOf: size)
         pipe_1.physicsBody?.isDynamic = false
         pipe_1.physicsBody?.categoryBitMask = PhysicsCategories.Obstacles
         
-        let pipe_2 = SKSpriteNode(color: .black, size: size)
+        let pipe_2 = SKSpriteNode(color: model.color, size: size)
         pipe_2.position = CGPoint(x: pipe_1.position.x + size.width + 250, y: 0.0)
         pipe_2.physicsBody = SKPhysicsBody(rectangleOf: size)
         pipe_2.physicsBody?.isDynamic = false
@@ -204,28 +216,31 @@ extension GameScene {
 }
 
 // MARK: - GameState
-extension GameScene {
+extension EaseScene {
     private func gameOver() {
         playerNode.over()
         
-        var highscore = UserDefaults.standard.integer(forKey: easeScoreKey)
+        var highscore = UserDefaults.standard.integer(forKey: scoreKey)
         if score > highscore {
             highscore = score
         }
         
         hudNode.setupGameOver(score, highscore)
+        run(collisionSound)
     }
     
     private func success() {
         if score >= requestScore {
             playerNode.activate(false)
             hudNode.setupSuccess()
+            
+            // Unlock MediumScene
         }
     }
 }
 
 // MARK: - SKPhysicsContactDelegate
-extension GameScene: SKPhysicsContactDelegate {
+extension EaseScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         let body = contact.bodyA.categoryBitMask == PhysicsCategories.Player ? contact.bodyB : contact.bodyA
         
@@ -235,17 +250,18 @@ extension GameScene: SKPhysicsContactDelegate {
         case PhysicsCategories.Side:
             playerNode.side()
         case PhysicsCategories.Obstacles:
-            //gameOver()
-            print("Obstaculos")
+            gameOver()
         case PhysicsCategories.Score:
             if let node = body.node {
                 score += 1
                 hudNode.updateScore(score)
                 
-                let highscore = UserDefaults.standard.integer(forKey: easeScoreKey)
+                let highscore = UserDefaults.standard.integer(forKey: scoreKey)
                 if score > highscore {
-                    UserDefaults.standard.set(score, forKey: easeScoreKey)
+                    UserDefaults.standard.set(score, forKey: scoreKey)
                 }
+                
+                run(scoreSound)
                 
                 node.removeFromParent()
                 success()
@@ -255,10 +271,12 @@ extension GameScene: SKPhysicsContactDelegate {
                 score += 5
                 hudNode.updateScore(score)
                 
-                let highscore = UserDefaults.standard.integer(forKey: easeScoreKey)
+                let highscore = UserDefaults.standard.integer(forKey: scoreKey)
                 if score > highscore {
-                    UserDefaults.standard.set(score, forKey: easeScoreKey)
+                    UserDefaults.standard.set(score, forKey: scoreKey)
                 }
+                
+                run(superScoreSound)
                 
                 node.removeFromParent()
                 success()
