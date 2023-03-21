@@ -22,14 +22,23 @@ class GameScene: SKScene {
     private let rightNode = SideNode()
     private let obstaclesNode = SKNode()
     
-    private var firstTap = true
+    var firstTap = true
     private var posY: CGFloat = 0.0
     private var pairNum = 0
     private var score = 0
     
+    private let easeNotifyKey = "EaseNotifyKey"
     private let easeScoreKey = "EaseScoreKey"
     
     private let requestScore = 50
+    private let btnName = "icon-letsGo"
+    private let titleTxt = "Bem-vindo ao nível facil"
+    private let subTxt = """
+Você tem que marcar
+pelo menos 50 pontos antes
+você pode jogar o próximo nível.
+Boa sorte!!!
+"""
     
     // MARK: - Lifecycle
     
@@ -86,6 +95,12 @@ extension GameScene {
         addChild(hudNode)
         hudNode.skView = view
         hudNode.easeScene = self
+        
+        if !UserDefaults.standard.bool(forKey: easeNotifyKey) {
+            UserDefaults.standard.set(true, forKey: easeNotifyKey)
+            hudNode.setupPanel(subTxt: subTxt, titleTxt: titleTxt, btnName: btnName)
+        }
+        
         
         // TODO: - WorldNode
         addChild(worldNode)

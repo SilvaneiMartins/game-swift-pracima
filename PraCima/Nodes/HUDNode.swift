@@ -27,6 +27,10 @@ class HUDNode: SKNode {
     private var continueNode: SKSpriteNode!
     private var nextNode: SKSpriteNode!
     
+    private var panelNode: SKSpriteNode!
+    private var panelTitleLbl: SKLabelNode!
+    private var panelSubLbl: SKLabelNode!
+    
     var easeScene: GameScene?
     var skView: SKView!
     
@@ -51,6 +55,12 @@ class HUDNode: SKNode {
     private var isNext = false {
         didSet {
             updateBtn(node: nextNode, event: isNext)
+        }
+    }
+    
+    private var isPanel = false {
+        didSet {
+            updateBtn(node: panelNode, event: isPanel)
         }
     }
     
@@ -84,6 +94,10 @@ class HUDNode: SKNode {
         if node.name == "Next" && !isNext {
             isNext = true
         }
+        
+        if node.name == "Panel" && !isPanel {
+            isPanel = true
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -105,6 +119,7 @@ class HUDNode: SKNode {
         
         if isContinue {
             isContinue = false
+            easeScene?.firstTap = true
             removeNode()
         }
         
@@ -116,6 +131,11 @@ class HUDNode: SKNode {
                 //scene.scaleMode = .aspectFill
                 //skView.presentScene(scene, transition: .doorway(withDuration: 1.5))
             }
+        }
+        
+        if isPanel {
+            isPanel = false
+            removeNode()
         }
     }
     
@@ -137,6 +157,10 @@ class HUDNode: SKNode {
         
         if let parent = nextNode?.parent {
             isNext = nextNode.contains(touch.location(in: parent))
+        }
+        
+        if let parent = panelNode?.parent {
+            isPanel = panelNode.contains(touch.location(in: parent))
         }
     }
 }
@@ -184,6 +208,9 @@ extension HUDNode {
         gameOverNode?.removeFromParent()
         continueNode?.removeFromParent()
         nextNode?.removeFromParent()
+        panelNode?.removeFromParent()
+        panelTitleLbl?.removeFromParent()
+        panelSubLbl?.removeFromParent()
     }
 }
  
@@ -323,5 +350,71 @@ extension HUDNode {
         )
         nextNode.name = "Próximo"
         addChild(nextNode)
+    }
+}
+
+// MARK: - Notif
+extension HUDNode {
+    func setupPanel(subTxt: String, titleTxt: String, btnName: String) {
+        createGameOverShape()
+        
+        isUserInteractionEnabled = true
+        let scale: CGFloat = appDL.isIphoneX ? 0.6 : 0.7
+        
+        // TODO: - Panel
+        createGamePanel("panel")
+        
+        // TODO: - PanelNode
+        panelNode = SKSpriteNode(imageNamed: "icon-next")
+        panelNode.setScale(scale)
+        panelNode.zPosition = 55.0
+        panelNode.position = CGPoint(
+            x: gameOverNode.frame.midX,
+            y: gameOverNode.frame.minY + panelNode.frame.height / 2 + 30
+        )
+        panelNode.name = "Panel"
+        addChild(panelNode)
+        
+        // TODO: - PanelTitleLbl
+        panelTitleLbl = SKLabelNode(fontNamed: FontName.rimouski)
+        panelTitleLbl.fontSize = 50.0
+        panelTitleLbl.text = titleTxt
+        panelTitleLbl.fontColor = .white
+        panelTitleLbl.zPosition = 55.0
+        panelTitleLbl.preferredMaxLayoutWidth = gameOverNode.frame.width - 60
+        panelTitleLbl.numberOfLines = 0
+        panelTitleLbl.position = CGPoint(
+            x: gameOverNode.frame.midX,
+            y: gameOverNode.frame.maxY - panelTitleLbl.frame.height - 20
+        )
+        addChild(panelTitleLbl)
+        
+        // TODO: - PanelSubLbl
+        let para = NSMutableParagraphStyle()
+        para.alignment = .center
+        para.lineSpacing = 8.0
+        
+        let subAtt: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: FontName.rimouski, size: 33.0)!,
+            .foregroundColor: UIColor.white,
+            .paragraphStyle: para
+        ]
+        
+        let rando = NSRange(location: 0, length: subTxt.count)
+        let subAttr = NSMutableAttributedString(string: subTxt)
+        subAttr.addAttributes(subAtt, range: rando)
+        
+        panelSubLbl = SKLabelNode(fontNamed: FontName.rimouski)
+        panelSubLbl.fontSize = 30
+        panelSubLbl.attributedText = subAttr
+        panelSubLbl.fontColor = .white
+        panelSubLbl.zPosition = 55.0
+        panelSubLbl.preferredMaxLayoutWidth = gameOverNode.frame.width * 0.7
+        panelSubLbl.numberOfLines = 0
+        panelSubLbl.position = CGPoint(
+            x: gameOverNode.frame.midX,
+            y: gameOverNode.frame.midY - panelSubLbl.frame.height / 2 + 30
+        )
+        addChild(panelSubLbl)
     }
 }
